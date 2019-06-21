@@ -94,13 +94,13 @@
         target.vanilla.className = [
           state.wordWrap,
           state.hyphens,
-          state.softHyphens === "-" ? "hidden" : ""
+          state.softHyphens === "-" ? "" : "hidden"
         ].join(" ");
         target.hyphenopoly.className = [
           "hyphenopoly",
           state.wordWrap,
           state.hyphens,
-          state.softHyphens === "-" ? "" : "hidden"
+          state.softHyphens === "-" ? "hidden" : ""
         ].join(" ");
         target.vanilla.style.width = state.width + "px";
         target.hyphenopoly.style.width = state.width + "px";
