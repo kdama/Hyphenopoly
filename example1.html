@@ -6,8 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Document</title>
     <style>
-      #target,
-      #target-hyphenopoly {
+      p {
         width: 200px;
         float: left;
         border: dotted 1px #aaa;
@@ -66,38 +65,20 @@
       </select>
     </div>
     <div class="container">
-      <div id="target">
-        <p lang="en-us">
-          The longest word in any of the major English language dictionaries is
-          pneumonoultramicroscopicsilicovolcanoconiosis, a word that refers to a
-          lung disease contracted from the inhalation of very fine silica
-          particles, specifically from a volcano; medically, it is the same as
-          silicosis. &mdash; Wikipedia
-        </p>
-        <p lang="sv">
-          Leere Seite entfernen<br />
-          Strichcodeinformationen verwenden als
-        </p>
-        <p lang="de">
-          Druckjob nach Ausführung löschen
-        </p>
-      </div>
-      <div id="target-hyphenopoly" class="hyphenopoly hidden">
-        <p lang="en-us">
-          The longest word in any of the major English language dictionaries is
-          pneumonoultramicroscopicsilicovolcanoconiosis, a word that refers to a
-          lung disease contracted from the inhalation of very fine silica
-          particles, specifically from a volcano; medically, it is the same as
-          silicosis. &mdash; Wikipedia
-        </p>
-        <p lang="sv">
-          Leere Seite entfernen<br />
-          Strichcodeinformationen verwenden als
-        </p>
-        <p lang="de">
-          Druckjob nach Ausführung löschen
-        </p>
-      </div>
+      <p id="target" lang="en-us">
+        The longest word in any of the major English language dictionaries is
+        pneumonoultramicroscopicsilicovolcanoconiosis, a word that refers to a
+        lung disease contracted from the inhalation of very fine silica
+        particles, specifically from a volcano; medically, it is the same as
+        silicosis. &mdash; Wikipedia
+      </p>
+      <p id="target-hyphenopoly" lang="en-us" class="hyphenopoly hidden">
+        The longest word in any of the major English language dictionaries is
+        pneumonoultramicroscopicsilicovolcanoconiosis, a word that refers to a
+        lung disease contracted from the inhalation of very fine silica
+        particles, specifically from a volcano; medically, it is the same as
+        silicosis. &mdash; Wikipedia
+      </p>
     </div>
     <script>
       var state = {
