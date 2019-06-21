@@ -47,6 +47,22 @@
     <script src="./Hyphenopoly_Loader.js"></script>
   </head>
   <body>
+    <div>
+      <input id="width" type="number" value="200" />
+      <select id="wordWrap">
+        <option>-</option>
+        <option value="wordBreakBreakAll">word-break: break-all;</option>
+        <option value="wordWrapBreakWord">word-wrap: break-word;</option>
+      </select>
+      <select id="hyphens">
+        <option>-</option>
+        <option value="hyphenate">hyphens: auto;</option>
+      </select>
+      <select id="softHyphens">
+        <option>-</option>
+        <option value="hyphenopoly">Hyphenopoly</option>
+      </select>
+    </div>
     <div class="container">
       <p id="target" lang="en-us">
         The longest word in any of the major English language dictionaries is
@@ -63,39 +79,31 @@
         silicosis. &mdash; Wikipedia
       </p>
     </div>
-    <div class="selects">
-      <select id="wordWrap">
-        <option>-</option>
-        <option value="wordBreakBreakAll">word-break: break-all;</option>
-        <option value="wordWrapBreakWord">word-wrap: break-word;</option>
-      </select>
-      <select id="hyphens">
-        <option>-</option>
-        <option value="hyphenate">hyphens: auto;</option>
-      </select>
-      <select id="softHyphens">
-        <option>-</option>
-        <option value="hyphenopoly">Hyphenopoly</option>
-      </select>
-    </div>
     <script>
       var state = {
         wordWrap: "-",
         hyphens: "-",
-        softHyphens: "-"
+        softHyphens: "-",
+        width: 200
+      };
+      var target = {
+        vanilla: document.getElementById("target"),
+        hyphenopoly: document.getElementById("target-hyphenopoly")
       };
       function applyStyles() {
-        document.getElementById("target").className = [
+        target.vanilla.className = [
           state.wordWrap,
           state.hyphens,
           state.softHyphens === "-" ? "hidden" : ""
         ].join(" ");
-        document.getElementById("target-hyphenopoly").className = [
+        target.hyphenopoly.className = [
           "hyphenopoly",
           state.wordWrap,
           state.hyphens,
           state.softHyphens === "-" ? "" : "hidden"
         ].join(" ");
+        target.vanilla.style.width = state.width + "px";
+        target.hyphenopoly.style.width = state.width + "px";
       }
       Object.keys(state).forEach(function(key) {
         document.getElementById(key).onchange = function(event) {
