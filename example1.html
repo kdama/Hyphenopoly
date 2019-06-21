@@ -1,52 +1,87 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-        <title>Example 1</title>
-        <script>
-        var Hyphenopoly = {
-            require: {
-                "la": "honorificabilitudinitas",
-                "de": "Silbentrennungsalgorithmus",
-                "en-us": "Supercalifragilisticexpialidocious"
-            },
-            paths: {
-                patterndir: "./patterns/",
-                maindir: "./"
-            },
-            setup: {
-                selectors: {
-                    ".container": {}
-                }
-            }
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+      p {
+        width: 100px;
+      }
+      .wordBreakBreakWord {
+        word-break: break-word;
+      }
+      .wordBreakBreakAll {
+        word-break: break-all;
+      }
+      .wordWrapBreakWord {
+        word-wrap: break-word;
+      }
+      .hyphenate {
+        hyphens: auto;
+      }
+    </style>
+    <script>
+      var Hyphenopoly = {
+        require: {
+          "en-us": "Supercalifragilisticexpialidocious"
+        },
+        paths: {
+          patterndir: "./patterns/",
+          maindir: "./"
+        },
+        setup: {
+          selectors: {
+            ".hyphenopoly": {}
+          }
+        }
+      };
+    </script>
+    <script src="./Hyphenopoly_Loader.js"></script>
+  </head>
+  <body>
+    <p id="target" lang="en-us">
+      The longest word in any of the major English language dictionaries is
+      pneumonoultramicroscopicsilicovolcanoconiosis, a word that refers to a
+      lung disease contracted from the inhalation of very fine silica particles,
+      specifically from a volcano; medically, it is the same as silicosis.
+      &mdash; Wikipedia
+    </p>
+    <div>
+      <select id="wordWrap">
+        <option>-</option>
+        <option value="wordBreakBreakAll">word-break: break-all;</option>
+        <option value="wordBreakBreakWord">word-wrap: break-word;</option>
+      </select>
+      <select id="hyphens">
+        <option>-</option>
+        <option value="hyphenate">hyphens: auto;</option>
+      </select>
+      <select id="softHyphens">
+        <option>-</option>
+        <option value="hyphenopoly">Hyphenopoly's soft hyphen</option>
+      </select>
+    </div>
+    <script>
+      var state = {
+        wordWrap: undefined,
+        hyphens: undefined,
+        softHyphens: undefined
+      };
+      function applyStyles() {
+        document.getElementById("target").className = [
+          state.wordWrap,
+          state.hyphens,
+          state.softHyphens
+        ].join(" ");
+      }
+      Object.keys(state).forEach(function(key) {
+        document.getElementById(key).onchange = function(event) {
+          state[key] = event.target.value;
+          applyStyles();
         };
-        </script>
-        <script src="./Hyphenopoly_Loader.js"></script>
-        <style type="text/css">
-            body {
-                width:60%;
-                margin-left:20%;
-            }
-            p {
-                text-align: justify;
-                margin: 0 2em 0 0;
-                float: left;
-                width: 100px;
-            }
-            .container {
-                hyphens: auto;
-                -ms-hyphens: auto;
-                -moz-hyphens: auto;
-                -webkit-hyphens: auto;
-            }
-        </style>
-    </head>
-    <body>
-        <h1>Example 1</h1>
-        <div class="container">
-            <p lang="la">Qua de causa Helvetii quoque reliquos Gallos virtute praecedunt, quod fere cotidianis proeliis cum Germanis contendunt, cum aut suis finibus eos prohibent aut ipsi in eorum finibus bellum gerunt.</p>
-            <p lang="en-us">For which reason the Helvetii also surpass the rest of the Gauls in valor, as they contend with the Germans in almost daily battles, when they either repel them from their own territories, or themselves wage war on their frontiers.</p>
-            <p lang="de">Aus diesem Grund übertreffen auch die Helvetier die übrigen Gallier an Tapferkeit, weil sie sich in fast täglichen Gefechten mit den Germanen messen, wobei sie diese entweder von ihrem Gebiet fernhalten oder selbst in deren Gebiet kämpfen.</p>
-        </div>
-    </body>
+      });
+    </script>
+  </body>
 </html>
