@@ -7,10 +7,13 @@
     <title>Document</title>
     <style>
       p {
-        width: 100px;
+        width: 200px;
+        float: left;
       }
-      .wordBreakBreakWord {
-        word-break: break-word;
+      .container::after {
+        content: "";
+        display: block;
+        clear: both;
       }
       .wordBreakBreakAll {
         word-break: break-all;
@@ -20,6 +23,9 @@
       }
       .hyphenate {
         hyphens: auto;
+      }
+      .hidden {
+        display: none;
       }
     </style>
     <script>
@@ -41,18 +47,27 @@
     <script src="./Hyphenopoly_Loader.js"></script>
   </head>
   <body>
-    <p id="target" lang="en-us">
-      The longest word in any of the major English language dictionaries is
-      pneumonoultramicroscopicsilicovolcanoconiosis, a word that refers to a
-      lung disease contracted from the inhalation of very fine silica particles,
-      specifically from a volcano; medically, it is the same as silicosis.
-      &mdash; Wikipedia
-    </p>
-    <div>
+    <div class="container">
+      <p id="target" lang="en-us">
+        The longest word in any of the major English language dictionaries is
+        pneumonoultramicroscopicsilicovolcanoconiosis, a word that refers to a
+        lung disease contracted from the inhalation of very fine silica
+        particles, specifically from a volcano; medically, it is the same as
+        silicosis. &mdash; Wikipedia
+      </p>
+      <p id="target-hyphenopoly" lang="en-us" class="hyphenopoly hidden">
+        The longest word in any of the major English language dictionaries is
+        pneumonoultramicroscopicsilicovolcanoconiosis, a word that refers to a
+        lung disease contracted from the inhalation of very fine silica
+        particles, specifically from a volcano; medically, it is the same as
+        silicosis. &mdash; Wikipedia
+      </p>
+    </div>
+    <div class="selects">
       <select id="wordWrap">
         <option>-</option>
         <option value="wordBreakBreakAll">word-break: break-all;</option>
-        <option value="wordBreakBreakWord">word-wrap: break-word;</option>
+        <option value="wordWrapBreakWord">word-wrap: break-word;</option>
       </select>
       <select id="hyphens">
         <option>-</option>
@@ -60,20 +75,26 @@
       </select>
       <select id="softHyphens">
         <option>-</option>
-        <option value="hyphenopoly">Hyphenopoly's soft hyphen</option>
+        <option value="hyphenopoly">Hyphenopoly</option>
       </select>
     </div>
     <script>
       var state = {
-        wordWrap: undefined,
-        hyphens: undefined,
-        softHyphens: undefined
+        wordWrap: "-",
+        hyphens: "-",
+        softHyphens: "-"
       };
       function applyStyles() {
         document.getElementById("target").className = [
           state.wordWrap,
           state.hyphens,
-          state.softHyphens
+          state.softHyphens === "-" ? "hidden" : ""
+        ].join(" ");
+        document.getElementById("target-hyphenopoly").className = [
+          "hyphenopoly",
+          state.wordWrap,
+          state.hyphens,
+          state.softHyphens === "-" ? "" : "hidden"
         ].join(" ");
       }
       Object.keys(state).forEach(function(key) {
